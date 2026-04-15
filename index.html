@@ -1,1 +1,523 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>YallQuran — Read the Holy Quran</title>
+  <link rel="icon" type="image/png" href="icon.png" />
 
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Google Fonts: Amiri (Arabic feel) + Lora (reading body) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Lora:ital,wght@0,400;0,600;1,400&family=Noto+Naskh+Arabic:wght@400;600&display=swap" rel="stylesheet" />
+
+  <script>
+    tailwind.config = {
+      darkMode: ['class', '[data-theme="dark"]'],
+      theme: {
+        extend: {
+          fontFamily: {
+            display: ['Amiri', 'Georgia', 'serif'],
+            body:    ['Lora', 'Georgia', 'serif'],
+            arabic:  ['Noto Naskh Arabic', 'serif'],
+          },
+          colors: {
+            parchment: {
+              50:  '#fdf8f0',
+              100: '#f7eedc',
+              200: '#eedcb8',
+              300: '#e3c98f',
+              400: '#d4a853',
+            },
+            ink: {
+              900: '#1a1208',
+              800: '#2d200f',
+              700: '#3d2e18',
+            },
+            gold: {
+              400: '#c9973a',
+              500: '#b07d24',
+              600: '#8f6318',
+            },
+            midnight: {
+              900: '#0b0f1a',
+              800: '#111827',
+              700: '#1c2535',
+              600: '#263041',
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* ── Root theme variables ─────────────────────────────── */
+    :root {
+      --bg-primary:    #fdf8f0;
+      --bg-secondary:  #f7eedc;
+      --bg-card:       #fffdf7;
+      --text-primary:  #1a1208;
+      --text-secondary:#5a4a30;
+      --text-muted:    #9a8060;
+      --border-color:  #e8d8b8;
+      --accent:        #b07d24;
+      --accent-light:  #eedcb8;
+      --shadow:        0 2px 20px rgba(176,125,36,0.10);
+      --shadow-lg:     0 8px 40px rgba(176,125,36,0.14);
+    }
+    [data-theme="dark"] {
+      --bg-primary:    #0b0f1a;
+      --bg-secondary:  #111827;
+      --bg-card:       #1c2535;
+      --text-primary:  #f0e8d8;
+      --text-secondary:#c8b898;
+      --text-muted:    #8a7a60;
+      --border-color:  #2d3a4d;
+      --accent:        #c9973a;
+      --accent-light:  #2a2010;
+      --shadow:        0 2px 20px rgba(0,0,0,0.4);
+      --shadow-lg:     0 8px 40px rgba(0,0,0,0.5);
+    }
+
+    /* ── Base ─────────────────────────────────────────────── */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      font-family: 'Lora', Georgia, serif;
+      transition: background-color 0.35s ease, color 0.35s ease;
+      min-height: 100vh;
+    }
+
+    /* subtle dot-grid background */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: radial-gradient(circle, var(--border-color) 1px, transparent 1px);
+      background-size: 28px 28px;
+      opacity: 0.45;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ── Header ───────────────────────────────────────────── */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background-color: var(--bg-primary);
+      border-bottom: 1px solid var(--border-color);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      box-shadow: var(--shadow);
+      transition: background-color 0.35s ease, border-color 0.35s ease;
+    }
+
+    .header-inner {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 14px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .logo-group {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      text-decoration: none;
+    }
+
+    .logo-group img {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      object-fit: cover;
+      border: 2px solid var(--accent-light);
+    }
+
+    .logo-group .site-name {
+      font-family: 'Amiri', Georgia, serif;
+      font-size: 1.55rem;
+      font-weight: 700;
+      color: var(--accent);
+      letter-spacing: 0.01em;
+      line-height: 1;
+    }
+
+    .logo-group .site-tagline {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      line-height: 1;
+      margin-top: 2px;
+    }
+
+    /* ── Controls Row ─────────────────────────────────────── */
+    .controls {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .select-styled {
+      appearance: none;
+      background-color: var(--bg-secondary);
+      color: var(--text-primary);
+      border: 1.5px solid var(--border-color);
+      border-radius: 10px;
+      padding: 8px 36px 8px 14px;
+      font-family: 'Lora', serif;
+      font-size: 0.85rem;
+      cursor: pointer;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%239a8060' stroke-width='2' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 12px center;
+      transition: border-color 0.2s, background-color 0.3s;
+      max-width: 220px;
+    }
+
+    .select-styled:focus {
+      outline: none;
+      border-color: var(--accent);
+    }
+
+    /* Dark mode toggle */
+    .theme-btn {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      border: 1.5px solid var(--border-color);
+      background: var(--bg-secondary);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.25s, border-color 0.25s, transform 0.15s;
+      color: var(--accent);
+      font-size: 1.1rem;
+    }
+
+    .theme-btn:hover {
+      background: var(--accent-light);
+      border-color: var(--accent);
+      transform: scale(1.07);
+    }
+
+    /* ── Main layout ──────────────────────────────────────── */
+    main {
+      position: relative;
+      z-index: 1;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 32px 20px 60px;
+    }
+
+    /* ── Surah header card ────────────────────────────────── */
+    #surah-header {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 18px;
+      padding: 32px 28px 24px;
+      margin-bottom: 28px;
+      text-align: center;
+      box-shadow: var(--shadow-lg);
+      display: none;
+    }
+
+    #surah-header .surah-number {
+      display: inline-block;
+      background: var(--accent);
+      color: #fff;
+      font-family: 'Amiri', serif;
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 4px 14px;
+      border-radius: 999px;
+      margin-bottom: 14px;
+    }
+
+    #surah-header h2 {
+      font-family: 'Amiri', Georgia, serif;
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      line-height: 1.2;
+    }
+
+    #surah-header .surah-meta {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-top: 4px;
+    }
+
+    #surah-header .bismillah {
+      font-family: 'Noto Naskh Arabic', serif;
+      font-size: 2rem;
+      color: var(--accent);
+      margin-top: 20px;
+      line-height: 1.8;
+      direction: rtl;
+    }
+
+    /* ── Ayah cards ───────────────────────────────────────── */
+    #ayah-container {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .ayah-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 14px;
+      padding: 24px 26px;
+      box-shadow: var(--shadow);
+      transition: box-shadow 0.2s, transform 0.2s, border-color 0.2s;
+      opacity: 0;
+      animation: fadeSlideIn 0.4s ease forwards;
+    }
+
+    .ayah-card:hover {
+      box-shadow: var(--shadow-lg);
+      transform: translateY(-2px);
+      border-color: var(--accent);
+    }
+
+    .ayah-number {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 34px;
+      height: 34px;
+      background: var(--accent-light);
+      color: var(--accent);
+      border: 1.5px solid var(--accent);
+      border-radius: 50%;
+      font-family: 'Amiri', serif;
+      font-size: 0.82rem;
+      font-weight: 700;
+      flex-shrink: 0;
+      margin-bottom: 14px;
+    }
+
+    .ayah-arabic {
+      font-family: 'Noto Naskh Arabic', serif;
+      font-size: 1.65rem;
+      line-height: 2.2;
+      text-align: right;
+      direction: rtl;
+      color: var(--text-primary);
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 14px;
+      margin-bottom: 14px;
+    }
+
+    .ayah-translation {
+      font-family: 'Lora', serif;
+      font-size: 0.95rem;
+      line-height: 1.8;
+      color: var(--text-secondary);
+      font-style: italic;
+    }
+
+    @keyframes fadeSlideIn {
+      from { opacity: 0; transform: translateY(14px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* stagger delays */
+    .ayah-card:nth-child(1)  { animation-delay: 0.02s }
+    .ayah-card:nth-child(2)  { animation-delay: 0.06s }
+    .ayah-card:nth-child(3)  { animation-delay: 0.10s }
+    .ayah-card:nth-child(4)  { animation-delay: 0.14s }
+    .ayah-card:nth-child(5)  { animation-delay: 0.18s }
+    .ayah-card:nth-child(6)  { animation-delay: 0.22s }
+    .ayah-card:nth-child(7)  { animation-delay: 0.26s }
+
+    /* ── Skeleton loader ──────────────────────────────────── */
+    .skeleton {
+      background: linear-gradient(90deg, var(--bg-secondary) 25%, var(--border-color) 50%, var(--bg-secondary) 75%);
+      background-size: 200% 100%;
+      animation: shimmer 1.4s infinite;
+      border-radius: 8px;
+    }
+
+    @keyframes shimmer {
+      0%   { background-position: 200% 0; }
+      100% { background-position: -200% 0; }
+    }
+
+    .skeleton-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 14px;
+      padding: 24px 26px;
+    }
+
+    /* ── Welcome / empty state ────────────────────────────── */
+    #welcome {
+      text-align: center;
+      padding: 60px 20px;
+    }
+
+    #welcome .welcome-icon {
+      font-size: 4rem;
+      margin-bottom: 20px;
+      animation: float 3s ease-in-out infinite;
+    }
+
+    #welcome h1 {
+      font-family: 'Amiri', serif;
+      font-size: 2.4rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 10px;
+    }
+
+    #welcome p {
+      color: var(--text-muted);
+      font-size: 1rem;
+      line-height: 1.7;
+      max-width: 420px;
+      margin: 0 auto;
+    }
+
+    #welcome .arabic-welcome {
+      font-family: 'Noto Naskh Arabic', serif;
+      font-size: 1.6rem;
+      color: var(--accent);
+      margin-top: 18px;
+      direction: rtl;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50%       { transform: translateY(-10px); }
+    }
+
+    /* ── Error state ──────────────────────────────────────── */
+    #error-msg {
+      display: none;
+      background: #fff5f5;
+      border: 1.5px solid #fca5a5;
+      border-radius: 14px;
+      padding: 22px 24px;
+      color: #b91c1c;
+      font-size: 0.9rem;
+      text-align: center;
+    }
+    [data-theme="dark"] #error-msg {
+      background: #2d1010;
+      border-color: #7f1d1d;
+      color: #fca5a5;
+    }
+
+    /* ── Footer ───────────────────────────────────────────── */
+    footer {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      padding: 22px 16px 32px;
+      color: var(--text-muted);
+      font-size: 0.78rem;
+      letter-spacing: 0.04em;
+      border-top: 1px solid var(--border-color);
+    }
+
+    footer a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+    footer a:hover { text-decoration: underline; }
+
+    /* ── Responsive tweaks ────────────────────────────────── */
+    @media (max-width: 600px) {
+      .header-inner { flex-wrap: wrap; }
+      .controls { width: 100%; justify-content: flex-end; }
+      .select-styled { flex: 1; max-width: 100%; }
+      .ayah-arabic { font-size: 1.4rem; }
+      #welcome h1 { font-size: 1.8rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ════ HEADER ════════════════════════════════════════════ -->
+  <header>
+    <div class="header-inner">
+      <!-- Logo -->
+      <a class="logo-group" href="#">
+        <img src="icon.png" alt="YallQuran Logo" />
+        <div>
+          <div class="site-name">YallQuran</div>
+          <div class="site-tagline">Read · Reflect · Remember</div>
+        </div>
+      </a>
+
+      <!-- Controls -->
+      <div class="controls">
+        <select id="surah-select" class="select-styled" aria-label="Select Surah">
+          <option value="" disabled selected>Select a Surah…</option>
+        </select>
+
+        <button id="theme-toggle" class="theme-btn" aria-label="Toggle dark/light mode" title="Toggle theme">
+          <span id="theme-icon">🌙</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ════ MAIN ══════════════════════════════════════════════ -->
+  <main>
+    <!-- Welcome state (shown before any Surah is loaded) -->
+    <div id="welcome">
+      <div class="welcome-icon">📖</div>
+      <h1>Welcome to YallQuran</h1>
+      <p>A clean, distraction-free way to read the Holy Quran. Select a Surah above to begin your reading.</p>
+      <div class="arabic-welcome">بِسْمِ اللّٰهِ الرَّحْمٰنِ الرَّحِيْمِ</div>
+    </div>
+
+    <!-- Surah info card (shown after loading) -->
+    <div id="surah-header">
+      <div class="surah-number" id="surah-number-badge">Surah 1</div>
+      <h2 id="surah-name-en">Al-Fatihah</h2>
+      <div class="surah-meta" id="surah-meta">Mecca · 7 Ayahs</div>
+      <div class="bismillah" id="bismillah-text">بِسْمِ اللّٰهِ الرَّحْمٰنِ الرَّحِيْمِ</div>
+    </div>
+
+    <!-- Error message -->
+    <div id="error-msg">
+      ⚠️ <span id="error-text">Failed to load Surah. Please check your connection and try again.</span>
+    </div>
+
+    <!-- Ayah cards injected here -->
+    <div id="ayah-container" role="list" aria-label="Ayahs"></div>
+  </main>
+
+  <!-- ════ FOOTER ════════════════════════════════════════════ -->
+  <footer>
+    <p>
+      YallQuran — Open source &amp; free · API by
+      <a href="https://alquran.cloud" target="_blank" rel="noopener">AlQuran.cloud</a>
+      · Built by <a href="https://github.com/yallcode" target="_blank" rel="noopener">YallCode</a>
+    </p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
