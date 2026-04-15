@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="icon.png" alt="YallQuran Logo" width="100" height="100" style="border-radius:16px;" />
+  <img src="siteimage.png" alt="YallQuran Logo" width="100" height="100" style="border-radius:16px;" />
 
   <h1>YallQuran 📖</h1>
 
