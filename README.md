@@ -1,30 +1,30 @@
 <div align="center">
-  <img src="siteimage.png" alt="YallQuran Logo" width="100" height="100" style="border-radius:16px;" />
+  <img src="icon.png" alt="YallQuran Logo" width="100" style="border-radius:16px;" />
 
   <h1>YallQuran 📖</h1>
 
-  <p><em>A clean, minimalist, open-source Quran reading website — no ads, no clutter, just the Word.</em></p>
+  <p><em>A clean, open-source Quran reading website with Tajweed coloring, multiple Qirāʾāt scripts, and imam audio recitation.</em></p>
 
   <a href="https://yallcode.github.io/YallQuran/">
-    <img src="https://img.shields.io/badge/Live%20Site-GitHub%20Pages-gold?style=flat-square&logo=github" alt="Live Site" />
+    <img src="https://img.shields.io/badge/Live%20Site-GitHub%20Pages-gold?style=flat-square&logo=github" />
   </a>
   &nbsp;
-  <img src="https://img.shields.io/badge/License-MIT-green?style=flat-square" alt="MIT License" />
+  <img src="https://img.shields.io/badge/License-MIT-green?style=flat-square" />
   &nbsp;
-  <img src="https://img.shields.io/badge/API-AlQuran.cloud-blue?style=flat-square" alt="API" />
+  <img src="https://img.shields.io/badge/API-AlQuran.cloud-blue?style=flat-square" />
   &nbsp;
-  <img src="https://img.shields.io/badge/Dark%20Mode-Supported-333?style=flat-square&logo=half-life" alt="Dark Mode" />
-
+  <img src="https://img.shields.io/badge/Audio-Islamic.network-teal?style=flat-square" />
+  &nbsp;
+  <img src="https://img.shields.io/badge/Tajweed-Color%20Coded-orange?style=flat-square" />
 </div>
 
 ---
 
 ## ✨ What is YallQuran?
 
-**YallQuran** is a lightweight, distraction-free Quran reading web app built and maintained by [YallCode](https://github.com/yallcode). It fetches the full Arabic text and English translation of all 114 Surahs from the free [AlQuran.cloud API](https://alquran.cloud/api) and renders them in a beautiful, mobile-friendly reading experience — hosted entirely on GitHub Pages with zero backend.
+**YallQuran** is a lightweight, distraction-free Quran reading website built by [YallCode](https://github.com/yallcode) and hosted on GitHub Pages. It requires **no backend, no login, and no paywalls** — just open `index.html` and read.
 
-> *"Indeed, it is We who sent down the Quran and indeed, We will be its guardian."*
-> — Surah Al-Hijr (15:9)
+> *"Indeed, it is We who sent down the Quran and indeed, We will be its guardian."* — Surah Al-Hijr (15:9)
 
 ---
 
@@ -32,31 +32,54 @@
 
 | Feature | Details |
 |---|---|
-| 📡 **Live API Integration** | Fetches all 114 Surahs (Arabic + English) from AlQuran.cloud |
-| 🌙 **Dark / Light Mode** | Toggle with one click — preference saved to `localStorage` |
-| 📱 **Mobile Responsive** | Clean layout on all screen sizes |
-| ⚡ **Skeleton Loaders** | Smooth loading placeholders while data fetches |
-| 🕌 **Bismillah Header** | Displayed automatically for each applicable Surah |
-| ✍️ **Arabic Typography** | Rendered in Noto Naskh Arabic for proper Uthmani script |
-| 🎨 **Parchment + Midnight themes** | Warm parchment for light, deep midnight blue for dark |
-| 🪶 **No frameworks** | Vanilla JS + Tailwind CDN — ultra-lightweight |
-| 📂 **Open Source** | MIT licensed — fork, remix, and learn freely |
+| 📜 **Multiple Qirāʾāt** | Ḥafs ʿan ʿĀṣim (Uthmani & Simple), Warsh ʿan Nāfiʿ, Unvocalised |
+| 🎨 **Tajweed Colors** | Color-coded Ghunnah, Qalqalah, Madd, Ikhfa, Idgham |
+| 🎙️ **8 Reciters** | Al-Afasy, As-Sudais, Al-Husary, Al-Minshawi, Ayyoub, Basfar, Al-Shuraim, Ar-Rifai |
+| ⏯️ **Full Audio Player** | Play/pause, previous/next, seek bar, volume, auto-advance |
+| 🌙 **Dark / Light Mode** | Theme persisted in `localStorage` |
+| 📱 **Mobile Responsive** | Clean reading layout on all screen sizes |
+| ⚡ **Skeleton Loaders** | Smooth placeholders while API fetches |
+| 📂 **Open Source** | MIT licensed — fork and remix freely |
+| 🪶 **No frameworks** | Vanilla JS + Tailwind CDN — zero build step |
 
 ---
 
-## 📸 Preview
+## 🎨 Tajweed Color Guide
 
-> *Select a Surah from the dropdown to start reading. Arabic and English translation appear side by side in elegant cards.*
+| Color | Rule | Example |
+|---|---|---|
+| 🟢 **Green** | Ghunnah — nasal sound | نّ  مّ |
+| 🔵 **Blue** | Qalqalah — echoing stop | قْ طْ بْ جْ دْ |
+| 🔴 **Red** | Madd — elongation | ا  و  ي |
+| 🟣 **Purple** | Ikhfa — hidden nasal | نْ + ikhfa letter |
+| 🟠 **Orange** | Idgham — merging letters | tanwin + ي ن م و |
+
+> Tajweed colouring is a client-side approximation and covers the most visually recognisable rules. Toggle it on/off from the sidebar.
+
+---
+
+## 🎙️ Available Reciters
+
+| Reciter | Country | Style |
+|---|---|---|
+| Mishary Rashid Al-Afasy | Kuwait | Warm, melodic murattal |
+| Abdurrahman As-Sudais | Saudi Arabia | Imam of Al-Haram, Makkah |
+| Mahmoud Khalil Al-Husary | Egypt | Classic mujawwad |
+| Mohamed Siddiq Al-Minshawi | Egypt | Legendary murattal & mujawwad |
+| Muhammad Ayyoub | Saudi Arabia | Madinah Imam, deep voice |
+| Abdullah Basfar | Saudi Arabia | Clear, precise murattal |
+| Saud Al-Shuraim | Saudi Arabia | Imam of Al-Haram, Makkah |
+| Hani Ar-Rifai | Saudi Arabia | Gentle, serene tone |
 
 ---
 
 ## 🛠️ Tech Stack
 
-- **HTML5 / CSS3** — semantic, accessible markup
-- **Tailwind CSS** — via CDN (no build step needed)
-- **Vanilla JavaScript (ES2020)** — no frameworks, no dependencies
-- **[AlQuran.cloud API](https://alquran.cloud/api)** — free, open Quran data
-  - Edition used: `quran-uthmani` (Arabic) + `en.sahih` (Saheeh International)
+- **HTML5 / CSS3** — semantic markup, CSS variables for theming
+- **Tailwind CSS** — via CDN (no build step)
+- **Vanilla JavaScript (ES2020)** — no frameworks
+- **[AlQuran.cloud API](https://alquran.cloud/api)** — Quran text in multiple editions
+- **[Islamic.network CDN](https://cdn.islamic.network)** — per-ayah MP3 audio
 - **GitHub Pages** — zero-cost hosting
 
 ---
@@ -65,8 +88,8 @@
 
 ```
 YallQuran/
-├── index.html      ← Main UI (Tailwind, fonts, layout)
-├── app.js          ← API fetching, rendering, theme logic
+├── index.html      ← Full UI (sidebar, audio bar, Tailwind, fonts)
+├── app.js          ← All logic: API, tajweed, audio engine, theme
 ├── icon.png        ← App logo / favicon
 └── README.md       ← You're reading this!
 ```
@@ -75,76 +98,38 @@ YallQuran/
 
 ## ▶️ How to Use
 
-### Option 1 — Visit the live site
+### Option 1 — Live site
 
 👉 **[yallcode.github.io/YallQuran](https://yallcode.github.io/YallQuran/)**
 
 ### Option 2 — Run locally
 
-No build step or server needed.
-
 ```bash
-# 1. Clone the repo
 git clone https://github.com/yallcode/YallQuran.git
+cd YallQuran
 
-# 2. Open the file directly in your browser
-open YallQuran/index.html
-# or just double-click index.html in your file manager
+# Option A: open directly (works in most browsers)
+open index.html
+
+# Option B: local server (recommended to avoid CORS issues)
+python -m http.server 8080
+# → visit http://localhost:8080
 ```
 
-> ⚠️ Some browsers block API calls from `file://` URLs due to CORS. If nothing loads, use a simple local server:
-> ```bash
-> # Python 3
-> python -m http.server 8080
-> # Then visit http://localhost:8080
-> ```
+### Using the sidebar
 
----
-
-## 🌐 API Reference
-
-YallQuran uses the free **[AlQuran.cloud API](https://alquran.cloud/api)** (no API key required).
-
-| Endpoint used | Purpose |
-|---|---|
-| `GET /v1/surah` | Fetch the list of all 114 Surahs |
-| `GET /v1/surah/{n}/quran-uthmani` | Fetch Arabic text for Surah n |
-| `GET /v1/surah/{n}/en.sahih` | Fetch English translation for Surah n |
-
-Both Arabic and translation requests are fired **in parallel** (`Promise.all`) for speed.
-
----
-
-## 🤝 Contributing
-
-Contributions, issues, and feature requests are all welcome! 🙌
-
-1. Fork the repo
-2. Create your branch: `git checkout -b feature/amazing-feature`
-3. Commit your changes: `git commit -m "Add amazing feature"`
-4. Push to the branch: `git push origin feature/amazing-feature`
-5. Open a Pull Request
-
----
-
-## 💡 Planned Features
-
-- [ ] 🔖 Bookmark / favourite Ayahs
-- [ ] 🔊 Audio recitation player (per Ayah)
-- [ ] 🔍 Search across all Ayahs
-- [ ] 🌍 Multi-language translations
-- [ ] 📋 Copy Ayah to clipboard
+1. Click the **☰ hamburger** in the top-left to open the settings sidebar
+2. **Qirāʾāt & Script** — choose your preferred Arabic script / qira'at
+3. **Tajweed Colors** — toggle color-coded tajweed highlighting on/off
+4. **Reciter & Audio** — pick an imam; a player bar appears at the bottom
+5. Press **▶** on any Ayah card or use the bottom player to control playback
 
 ---
 
 ## 📄 License
 
-This project is licensed under the **MIT License** — see below for details.
-
 ```
-MIT License
-
-Copyright (c) 2025 YallCode
+MIT License — Copyright (c) 2025 YallCode
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -158,21 +143,14 @@ copies or substantial portions of the Software.
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
 ```
 
 ---
 
 <div align="center">
   Made with 🤍 by <a href="https://github.com/yallcode">YallCode</a>
-  &nbsp;·&nbsp;
-  <a href="https://yallcode.github.io/YallaYCode/">Website</a>
-  &nbsp;·&nbsp;
-  <a href="https://www.youtube.com/@YallaYCode">YouTube</a>
-  &nbsp;·&nbsp;
-  <a href="https://x.com/YallCode">X / Twitter</a>
+  &nbsp;·&nbsp; <a href="https://yallcode.github.io/YallaYCode/">Website</a>
+  &nbsp;·&nbsp; <a href="https://www.youtube.com/@YallaYCode">YouTube</a>
+  &nbsp;·&nbsp; <a href="https://x.com/YallCode">X / Twitter</a>
 </div>
