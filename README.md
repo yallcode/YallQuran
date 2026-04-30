@@ -1,7 +1,7 @@
 <div align="center">
   <img src="icon.png" alt="YallQuran Logo" width="100" style="border-radius:16px;" />
 
-  <h1>YallQuran 📖</h1>
+  <h1>Quran 📖</h1>
 
   <p><em>A clean, open-source Quran reading website with Tajweed coloring, multiple Qirāʾāt scripts, and imam audio recitation.</em></p>
 
@@ -22,7 +22,7 @@
 
 ## ✨ What is YallQuran?
 
-**YallQuran** is a lightweight, distraction-free Quran reading website built by [YallCode](https://github.com/yallcode) and hosted on GitHub Pages. It requires **no backend, no login, and no paywalls** — just open `index.html` and read.
+**Quran** is a lightweight, distraction-free Quran reading website built by [YallCode](https://github.com/yallcode) and hosted on GitHub Pages. It requires **no backend, no login, and no paywalls** — just open `index.html` and read.
 
 > *"Indeed, it is We who sent down the Quran and indeed, We will be its guardian."* — Surah Al-Hijr (15:9)
 
@@ -87,7 +87,7 @@
 ## 📂 Project Structure
 
 ```
-YallQuran/
+Quran/
 ├── index.html      ← Full UI (sidebar, audio bar, Tailwind, fonts)
 ├── app.js          ← All logic: API, tajweed, audio engine, theme
 ├── icon.png        ← App logo / favicon
@@ -100,13 +100,13 @@ YallQuran/
 
 ### Option 1 — Live site
 
-👉 **[yallcode.github.io/YallQuran](https://yallcode.github.io/YallQuran/)**
+👉 **[yallcode.github.io/Quran](https://yallcode.github.io/Quran/)**
 
 ### Option 2 — Run locally
 
 ```bash
-git clone https://github.com/yallcode/YallQuran.git
-cd YallQuran
+git clone https://github.com/yallcode/Quran.git
+cd Quran
 
 # Option A: open directly (works in most browsers)
 open index.html
