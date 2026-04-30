@@ -1,6 +1,6 @@
 /**
  * ╔══════════════════════════════════════════════════════════════╗
- *   YallQuran — app.js
+ *   Quran — app.js
  *   Author  : YallCode  (github.com/yallcode)
  *   API     : https://alquran.cloud/api  (text)
  *             https://cdn.islamic.network (audio)
