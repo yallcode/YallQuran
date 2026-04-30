@@ -5,7 +5,7 @@
 
   <p><em>A clean, open-source Quran reading website with Tajweed coloring, multiple Qirāʾāt scripts, and imam audio recitation.</em></p>
 
-  <a href="https://yallcode.github.io/YallQuran/">
+  <a href="https://yallcode.github.io/Quran/">
     <img src="https://img.shields.io/badge/Live%20Site-GitHub%20Pages-gold?style=flat-square&logo=github" />
   </a>
   &nbsp;
@@ -20,7 +20,7 @@
 
 ---
 
-## ✨ What is YallQuran?
+## ✨ What is Quran?
 
 **Quran** is a lightweight, distraction-free Quran reading website built by [YallCode](https://github.com/yallcode) and hosted on GitHub Pages. It requires **no backend, no login, and no paywalls** — just open `index.html` and read.
 
